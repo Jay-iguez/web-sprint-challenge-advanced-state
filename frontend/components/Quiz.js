@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { fetchQuiz, selectAnswer } from '../state/action-creators'
+import { fetchQuiz, selectAnswer, postAnswer } from '../state/action-creators'
 
 export default function Quiz() {
   {/**
@@ -51,7 +51,7 @@ export default function Quiz() {
               }
             </div>
 
-            <button id="submitAnswerBtn" disabled={selectedAnswer === null}>Submit answer</button>
+            <button id="submitAnswerBtn" disabled={selectedAnswer === null} onClick={() => dispatch(postAnswer({quiz_id: quizState.quiz_id, answer_id: selectedAnswer}))}>Submit answer</button>
           </>
         ) : 'Loading next quiz...'
       }
