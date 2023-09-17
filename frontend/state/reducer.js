@@ -1,6 +1,6 @@
 // ❗ You don't need to add extra reducers to achieve MVP
 import { combineReducers } from 'redux'
-import { MOVE_CLOCKWISE, MOVE_COUNTERCLOCKWISE } from './action-types'
+import { MOVE_CLOCKWISE, MOVE_COUNTERCLOCKWISE, SET_QUIZ_INTO_STATE, SET_SELECTED_ANSWER} from './action-types'
 
 const initialWheelState = 0
 function wheel(state = initialWheelState, action) {
@@ -8,9 +8,11 @@ function wheel(state = initialWheelState, action) {
     case MOVE_CLOCKWISE:
       const clock_Wise_Count = state === 5 ? 0 : state + 1
       return clock_Wise_Count
+
     case MOVE_COUNTERCLOCKWISE:
       const counter_Wise_Count = state === 0 ? 5 : state - 1
       return counter_Wise_Count
+
     default:
       return state
   }
@@ -18,17 +20,29 @@ function wheel(state = initialWheelState, action) {
 
 const initialQuizState = null
 function quiz(state = initialQuizState, action) {
-  return state
+  switch(action.type){
+    case SET_QUIZ_INTO_STATE:
+      const quizInformation = action.payload
+      return quizInformation
+    default:
+      return state
+  }
 }
 
 const initialSelectedAnswerState = null
 function selectedAnswer(state = initialSelectedAnswerState, action) {
-  return state
+   switch(action.type){
+    case SET_SELECTED_ANSWER:
+      const setAnswer = action.payload
+      return setAnswer
+    default:
+      return state
+  }
 }
 
 const initialMessageState = ''
 function infoMessage(state = initialMessageState, action) {
-  return state
+ return state
 }
 
 const initialFormState = {
