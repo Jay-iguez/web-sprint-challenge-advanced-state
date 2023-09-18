@@ -7,7 +7,6 @@ import { inputChange, postQuiz } from '../state/action-creators'
 export function Form(props) {
   const dispatch = useDispatch()
   const formValues = useSelector((state) => state.form)
-
   const isDisabled = Object.keys(formValues).filter(each => formValues[each].trim().length >= 2).length === 3 ? false : true
 
   const onChange = evt => {
