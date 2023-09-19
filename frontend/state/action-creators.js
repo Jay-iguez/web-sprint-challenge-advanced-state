@@ -36,11 +36,11 @@ export function postAnswer(answer) {
     // - Dispatch an action to reset the selected answer state
     // - Dispatch an action to set the server message to state
     // - Dispatch the fetching of the next quiz
-    dispatch(selectAnswer(null))
-    dispatch(setQuiz(null))
     axios.post('http://localhost:9000/api/quiz/answer', answer)
     .then(res => {
+      dispatch(selectAnswer(null))
       dispatch(setMessage(res.data.message))
+      dispatch(fetchQuiz())
     })
     .catch(err => console.error(err))
   }
@@ -54,7 +54,6 @@ export function postQuiz(newQuiz) {
     .then(res => {
       dispatch(resetForm())
       dispatch(setMessage(`Congrats: "${res.data.question}" is a great question!`))
-      dispatch(setQuiz(res.data))
       
     })
     .catch(err => console.error(err))
